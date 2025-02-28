@@ -6,6 +6,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Repository
@@ -20,5 +21,11 @@ public class UsuarioDaoImp  implements UsuarioDao{
         String query="FROM Usuario";
         List<Usuario> resultado= entityManager.createQuery(query).getResultList();
         return  resultado;
+    }
+
+    @Override
+    public void eliminar(Long id) {
+    Usuario usuario=entityManager.find(Usuario.class,id);
+    entityManager.remove(usuario);
     }
 }
